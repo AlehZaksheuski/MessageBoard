@@ -1,5 +1,5 @@
 """
-WSGI config for admitad_test_issue project.
+WSGI config for settings_app project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "admitad_test_issue.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings_app.settings")
 
 application = get_wsgi_application()
