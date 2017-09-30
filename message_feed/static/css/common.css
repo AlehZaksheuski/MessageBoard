@@ -1,0 +1,23 @@
+.add-message-button {
+    margin-top: 20px;
+}
+
+.nav-link {
+    color: white;
+}
+
+.show-comments {
+    float: right;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.show-comment-panel-button {
+    float: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.add-comment-panel {
+    display: none;
+}

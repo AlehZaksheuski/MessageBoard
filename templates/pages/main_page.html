@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block custom_headers %}
+    <title>Message Feed</title>
+    <script src="{% static "js/common.js" %}"></script>
+{% endblock custom_headers %}
+
+{% block body %}
+    <div class="container message-container">
+        <div class="panel-group">
+            {% for message in context %}
+                {% with is_can_add_comment=0 comment=message template_name="message_feed/single_message.html" %}
+                   {% include template_name %}
+                {% endwith %}
+            {% endfor %}
+        </div>
+    </div>
+    <a id='next_page' style="visibility: hidden;" href="message_feed/get_message?page=2"></a>
+{% endblock body %}

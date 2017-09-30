@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% load static from staticfiles %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="{% static "js/common.js" %}"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{% static "css/common.css" %}">
+        {% block custom_headers %}
+        {% endblock custom_headers %}
+    </head>
+    <body>
+        {% block block_nav %}
+            <div class="navbar-wrapper">
+                <div class="container">
+                    <nav class="navbar navbar-light bg-primary">
+                        <div class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav">
+                                <li class="active nav-item"><a class="nav-link" href="/">Home</a></li>
+                                <li><a class="nav-link" href="{% url 'message_feed:add_message' %}">Add new message</a></li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        {% endblock block_nav %}
+        {% block body %}
+        {% endblock body %}
+    </body>
+</html>

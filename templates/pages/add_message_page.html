@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block custom_headers %}
+    <title>Title</title>
+{% endblock custom_headers %}
+
+{% block body %}
+    <div class="container">
+        {{ errors }}
+        <form action="{% url 'message_feed:add_message' %}" method="post">
+            {% csrf_token %}
+            <label for="message_text">Message text</label>
+            <textarea id="message_text" type="text" name="text" class="form-control"></textarea>
+            <button class="btn btn-primary add-message-button">Add message</button>
+        </form>
+    </div>
+{% endblock body %}
