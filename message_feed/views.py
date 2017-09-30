@@ -55,7 +55,7 @@ class MessageRetrieveView(generics.RetrieveAPIView):
 
 
 class CreateMessageView(views.APIView):
-    serializer_class = MessageCreateSerializer
+    serializer_class = MessageSerializer
     queryset = Message.objects.all()
     renderer_classes = (renderers.TemplateHTMLRenderer, )
     permission_classes = (permissions.AllowAny, )

@@ -10,13 +10,6 @@ class MessageSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class MessageCreateSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Message
-        fields = ('text', 'depth', 'parent')
-
-
 class MessageCommentSerializer(serializers.ModelSerializer):
     children = RecursiveField(required=False, many=True, allow_null=True, source='message_set')
 
