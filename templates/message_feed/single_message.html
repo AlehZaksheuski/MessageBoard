@@ -1,31 +1,31 @@
 <div class="panel-group">
     <div class="panel panel-primary">
-        <div class="panel-heading">#{{ comment.id }} {{ comment.created_on }}</div>
+        <div class="panel-heading">#{{ id }} {{ created_on }}</div>
         <div class="panel-body">
-            {{ comment.text }}
+            {{ text }}
             <br>
-            <div id='add-comment-panel-{{ comment.id }}' class="add-comment-panel panel-group">
+            <div id='add-comment-panel-{{ id }}' class="add-comment-panel panel-group">
                 <div class="panel-body">
                     <div class="form-group">
-                        <textarea id="message-text-{{ comment.id }}" type="text" name="text" class="form-control add-comment-form"></textarea>
+                        <textarea id="message-text-{{ id }}" type="text" name="text" class="form-control add-comment-form"></textarea>
                     </div>
                     {% if is_can_add_comment != 0 %}
                         <div class="form-group">
-                            <button id='{{ comment.id }}' data-depth={{ comment.depth }}
+                            <button id='{{ id }}' data-depth={{ depth }}
                                     class="btn btn-success add-comment-button">Add comment</button>
-                            <button id='{{ comment.id }}'
+                            <button id='{{ id }}'
                                     class="btn btn-danger cancel-comment-button">Cancel</button>
                         </div>
                     {% endif %}
                 </div>
             </div>
             {% if is_can_add_comment != 0 %}
-                <button id='{{ comment.id }}'class="btn btn-success show-comment-panel-button">Add new comment</button>
+                <button id='{{ id }}'class="btn btn-success show-comment-panel-button">Add new comment</button>
             {% endif %}
             <button class="btn btn-info show-comments"
-                    onclick="location.href='/message_feed/get_message/{{ comment.id }}/'"
+                    onclick="location.href='/message_feed/get_message/{{ id }}/'"
             >Show comments</button>
         </div>
-{#        <a id='next_page' style="visibility: hidden;" href="/message_feed/get_message/{{ comment.id }}/"></a>#}
+{#        <a id='next_page' style="visibility: hidden;" href="/message_feed/get_message/{{ id }}/"></a>#}
     </div>
 </div>

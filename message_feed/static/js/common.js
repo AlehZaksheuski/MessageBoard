@@ -14,17 +14,22 @@ function getCookie(name) {
     return cookieValue;
 }
 
+function clearCommentInput(id) {
+    $('#message-text-' + id).val('')
+}
+
 function toogleAddCommentPanel(id) {
     $('#add-comment-panel-' + id).toggle()
 }
 
 function hideAddCommentPanel(id) {
     $('#add-comment-panel-' + id).hide()
+    clearCommentInput(id)
 }
 
 function addNewComment(event) {
     $.ajax({
-       url: '/message_feed/add_message' + event.target.id,
+       url: '/message_feed/add_message/' + event.target.id,
        data: {
           parent: event.target.id,
           text: $('#message-text-' + event.target.id).val(),
@@ -49,15 +54,10 @@ window.onload = function () {
         } else if ($(event.target).hasClass('add-comment-button')) {
             addNewComment(event);
             toogleAddCommentPanel(event.target.id);
+            clearCommentInput(event.target.id);
         } else if ($(event.target).hasClass('cancel-comment-button')) {
             hideAddCommentPanel(event.target.id);
         }
-    });
-    $('.message-container').infiniteScroll({
-      path: '#next_page',
-      append: '.panel-group',
-      history: false,
-      arg: '1',
     });
 };
 

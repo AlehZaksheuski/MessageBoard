@@ -4,19 +4,13 @@ from rest_framework import (
     renderers,
     response,
     views,
-    permissions,
 )
 from message_feed.models import Message
-from message_feed.serializers.common_serializers import MessageCreateSerializer, MessageSerializer, \
-    MessageCommentSerializer
+from message_feed.serializers.common_serializers import (
+    MessageSerializer,
+    MessageCommentSerializer,
+)
 from message_feed.paginators import MessagePaginator
-
-
-class MainPageView(views.APIView):
-    renderer_classes = (renderers.TemplateHTMLRenderer, )
-
-    def get(self, request, *args, **kwargs):
-        return response.Response({'context': Message.objects.filter(depth=0)[0:20]}, template_name='pages/main_page.html')
 
 
 class MessageListView(generics.ListAPIView):
@@ -34,31 +28,16 @@ class MessageListView(generics.ListAPIView):
 
 
 class MessageRetrieveView(generics.RetrieveAPIView):
-    renderer_classes = (renderers.TemplateHTMLRenderer, )
-    serializer_class = MessageCommentSerializer
     queryset = Message.objects.all()
-
-    def get(self, request, *args, **kwargs):
-        parent_id = kwargs.get('pk')
-        message = Message.objects.filter(id=parent_id).prefetch_related('message_set').first()
-
-        if message.message_set.exists():
-            page = request.query_params.get('page')
-            count = message.message_set.all().count()
-            if page and int(page) < count:
-                message = message.message_set.all()[int(page)]
-
-        return response.Response(
-            {'message': self.serializer_class(instance=message).data},
-            template_name='pages/single_message_page.html'
-        )
+    serializer_class = MessageCommentSerializer
+    renderer_classes = (renderers.TemplateHTMLRenderer,)
+    template_name = 'pages/single_message_page.html'
 
 
 class CreateMessageView(views.APIView):
     serializer_class = MessageSerializer
     queryset = Message.objects.all()
     renderer_classes = (renderers.TemplateHTMLRenderer, )
-    permission_classes = (permissions.AllowAny, )
 
     def get(self, request, *args, **kwargs):
         return response.Response({}, template_name='pages/add_message_page.html')
@@ -66,10 +45,14 @@ class CreateMessageView(views.APIView):
     def post(self, request):
         serializer = self.serializer_class(data=request.data)
         if serializer.is_valid():
-            new_message = serializer.save()
+            serializer.save()
             if request.data.get('parent'):
-                return response.Response({'comment': new_message}, template_name='message_feed/message_comment.html')
+                # Return rendered template for JS append.
+                return response.Response(serializer.data, template_name='message_feed/message_comment.html')
             else:
-                return HttpResponseRedirect("/")
+                return HttpResponseRedirect(request.data.get('previous_page', '/'))
         else:
-            return response.Response({'errors': serializer.error_messages}, template_name='pages/add_message_page.html')
+            return response.Response(
+                {'errors': serializer.error_messages},
+                template_name='pages/add_message_page.html',
+            )

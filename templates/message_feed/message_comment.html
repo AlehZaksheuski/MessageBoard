@@ -1,9 +1,9 @@
 {% include "message_feed/single_message.html" %}
 
-<ul id="target-new-comment-{{ comment.id }}">
-    {%if comment.has_children %}
-         {%for ch in comment.children %}
-              {% with comment=ch template_name="message_feed/message_comment.html" %}
+<ul id="target-new-comment-{{ id }}">
+    {%if has_children %}
+         {%for ch in children %}
+              {% with children=ch.children id=ch.id text=ch.text has_children=ch.has_children created_on=ch.created_on template_name="message_feed/message_comment.html" %}
                    {% include template_name %}
               {% endwith %}
          {% endfor %}

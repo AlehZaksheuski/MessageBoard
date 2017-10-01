@@ -8,7 +8,7 @@
 {% block body %}
     <body>
         <div class="container message-container">
-          {% with comment=message template_name="message_feed/message_comment.html" %}
+          {% with children=children id=id has_children=has_children template_name="message_feed/message_comment.html" %}
                {% include template_name %}
           {% endwith %}
         </div>
