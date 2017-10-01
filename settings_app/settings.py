@@ -25,7 +25,9 @@ SECRET_KEY = 'fo4ouj6dfq&06oqy(&u$u1fj3ztt)@d&_w!!v6s2k!db5c98c%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '*.herokuapp.com',
+]
 
 
 # Application definition
@@ -123,4 +125,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
-STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
