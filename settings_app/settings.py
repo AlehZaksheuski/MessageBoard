@@ -26,7 +26,7 @@ SECRET_KEY = 'fo4ouj6dfq&06oqy(&u$u1fj3ztt)@d&_w!!v6s2k!db5c98c%'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '*.herokuapp.com',
+    'messageboard-9549.herokuapp.com',
 ]
 
 
