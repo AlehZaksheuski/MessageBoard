@@ -28,8 +28,10 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'messageboard-9549.herokuapp.com',
 ]
-
-
+if DEBUG:
+    ALLOWED_HOSTS += [
+        '127.0.0.1',
+    ]
 
 # Application definition
 
@@ -131,4 +133,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
 
